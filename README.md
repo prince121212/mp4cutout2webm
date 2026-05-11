@@ -6,11 +6,8 @@
 ## 功能
 
 - 本地处理，不上传服务器
-- 中文 / 英文界面切换
 - 三帧预览：第一帧 / 中间帧 / 最后一帧
-- 预览背景切换：棋盘格 / 彩条 / 黑底 / 白底
 - 抠像参数微调：`similarity`、`blend`、`despill`
-- 左右 `- / +` 微调按钮，避免滑轨误触
 - 导出透明 VP9 WebM
 
 ## 运行要求
@@ -66,3 +63,7 @@ outputs/  # 最终导出的 webm
 - 这是纯本地工具，浏览器只负责界面。
 - 预览通过抽帧完成，导出时把同样的参数套到整段视频。
 - 如果你想更稳，可以先看第一帧、中间帧、最后一帧，再决定是否导出。
+
+## Star 趋势
+
+[![Star History Chart](https://api.star-history.com/svg?repos=prince121212/mp4cutout2webm&type=Date)](https://star-history.com/#prince121212/mp4cutout2webm&Date)
