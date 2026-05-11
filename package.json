@@ -1,0 +1,15 @@
+{
+  "name": "green-screen-webm-tool",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local green-screen to transparent WebM tool with first-frame tuning.",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "multer": "^1.4.5-lts.1"
+  },
+  "devDependencies": {}
+}

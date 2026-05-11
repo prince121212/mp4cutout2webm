@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title data-i18n="appTitle">绿幕透明 WebM 工具</title>
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="workspace">
+        <header class="topbar">
+          <div>
+            <h1 data-i18n="appTitle">绿幕透明 WebM 工具</h1>
+            <p id="videoMeta" data-i18n="videoMetaIdle">选择一个绿幕视频开始。</p>
+          </div>
+          <div class="top-actions">
+            <div class="language-switch" aria-label="Language switch">
+              <button id="langZh" class="is-active" type="button">中文</button>
+              <button id="langEn" type="button">EN</button>
+            </div>
+            <label class="file-button">
+              <input id="videoInput" type="file" accept="video/*">
+              <span data-i18n="chooseVideo">选择视频</span>
+            </label>
+          </div>
+        </header>
+
+        <div class="preview-grid">
+          <section class="preview-panel">
+            <div class="panel-title">
+              <h2 data-i18n="originalFrame">原始帧</h2>
+            </div>
+            <div class="frame-wrap plain">
+              <img id="originalFrame" alt="">
+              <span class="placeholder" data-i18n="noFrameLoaded">未加载画面</span>
+            </div>
+          </section>
+
+          <section class="preview-panel">
+            <div class="panel-title">
+              <h2 data-i18n="keyedPreview">抠像预览</h2>
+              <div class="preview-tools">
+                <div class="segmented" aria-label="Preview frame">
+                  <button class="frame-option is-active" data-frame="first" data-i18n="frameFirst">第一帧</button>
+                  <button class="frame-option" data-frame="middle" data-i18n="frameMiddle">中间帧</button>
+                  <button class="frame-option" data-frame="last" data-i18n="frameLast">最后帧</button>
+                </div>
+                <div class="segmented" aria-label="Preview background">
+                  <button class="bg-option is-active" data-bg="checker" data-i18n="bgChecker">棋盘</button>
+                  <button class="bg-option" data-bg="stripes" data-i18n="bgStripes">彩条</button>
+                  <button class="bg-option" data-bg="black" data-i18n="bgBlack">黑底</button>
+                  <button class="bg-option" data-bg="white" data-i18n="bgWhite">白底</button>
+                </div>
+              </div>
+            </div>
+            <div id="previewBackground" class="frame-wrap checker">
+              <img id="previewFrame" alt="">
+              <span class="placeholder" data-i18n="tuneToPreview">调整参数后预览</span>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <aside class="controls">
+        <section class="control-section">
+          <h2 data-i18n="keySettings">抠像参数</h2>
+          <label class="field color-field">
+            <span data-i18n="keyColor">抠像颜色</span>
+            <input id="keyColor" type="color" value="#21c72c">
+          </label>
+
+          <label class="field">
+            <span><span data-i18n="similarity">抠像强度</span> <output id="similarityValue">0.18</output></span>
+            <div class="stepper-range">
+              <button class="step-button" type="button" data-target="similarity" data-step="-1" aria-label="decrease">-</button>
+              <input id="similarity" type="range" min="0.01" max="0.40" step="0.005" value="0.18">
+              <button class="step-button" type="button" data-target="similarity" data-step="1" aria-label="increase">+</button>
+            </div>
+          </label>
+
+          <label class="field">
+            <span><span data-i18n="blend">边缘柔和</span> <output id="blendValue">0.03</output></span>
+            <div class="stepper-range">
+              <button class="step-button" type="button" data-target="blend" data-step="-1" aria-label="decrease">-</button>
+              <input id="blend" type="range" min="0" max="0.20" step="0.005" value="0.03">
+              <button class="step-button" type="button" data-target="blend" data-step="1" aria-label="increase">+</button>
+            </div>
+          </label>
+
+          <label class="field">
+            <span><span data-i18n="despillMix">去绿边强度</span> <output id="despillMixValue">0.25</output></span>
+            <div class="stepper-range">
+              <button class="step-button" type="button" data-target="despillMix" data-step="-1" aria-label="decrease">-</button>
+              <input id="despillMix" type="range" min="0" max="1" step="0.01" value="0.25">
+              <button class="step-button" type="button" data-target="despillMix" data-step="1" aria-label="increase">+</button>
+            </div>
+          </label>
+
+          <label class="field">
+            <span><span data-i18n="despillExpand">去绿边范围</span> <output id="despillExpandValue">0.15</output></span>
+            <div class="stepper-range">
+              <button class="step-button" type="button" data-target="despillExpand" data-step="-1" aria-label="decrease">-</button>
+              <input id="despillExpand" type="range" min="0" max="1" step="0.01" value="0.15">
+              <button class="step-button" type="button" data-target="despillExpand" data-step="1" aria-label="increase">+</button>
+            </div>
+          </label>
+        </section>
+
+        <section class="control-section">
+          <h2 data-i18n="export">导出</h2>
+          <label class="field">
+            <span><span data-i18n="qualityCrf">质量 CRF</span> <output id="crfValue">28</output></span>
+            <div class="stepper-range">
+              <button class="step-button" type="button" data-target="crf" data-step="-1" aria-label="decrease">-</button>
+              <input id="crf" type="range" min="18" max="45" step="1" value="28">
+              <button class="step-button" type="button" data-target="crf" data-step="1" aria-label="increase">+</button>
+            </div>
+          </label>
+
+          <div class="button-row">
+            <button id="previewButton" class="secondary" type="button" disabled data-i18n="preview">预览</button>
+            <button id="exportButton" class="primary" type="button" disabled data-i18n="exportWebm">导出 WebM</button>
+          </div>
+
+          <div class="progress-card">
+            <div class="progress-header">
+              <span id="statusText" data-i18n="idle">空闲</span>
+              <span id="progressText">0%</span>
+            </div>
+            <div class="progress-bar" aria-hidden="true">
+              <div id="progressFill"></div>
+            </div>
+          </div>
+
+          <a id="downloadLink" class="download-link" href="#" download hidden data-i18n="downloadOutput">下载输出文件</a>
+        </section>
+
+        <section class="control-section command-section">
+          <h2 data-i18n="filter">滤镜</h2>
+          <code id="filterText" data-i18n="noPreviewYet">还没有预览。</code>
+        </section>
+      </aside>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
