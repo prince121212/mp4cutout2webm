@@ -67,3 +67,5 @@ outputs/  # 最终导出的 webm
 ## Star 趋势
 
 [![Star History Chart](https://api.star-history.com/svg?repos=prince121212/mp4cutout2webm&type=Date)](https://star-history.com/#prince121212/mp4cutout2webm&Date)
+
+错了
